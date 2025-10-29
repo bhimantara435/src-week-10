@@ -22,3 +22,7 @@ Membuat class `Task` pada folder `models/` untuk merepresentasikan satu tugas de
 ![Langkah ke 2](image/Screenshot%202025-10-29%20143459.png)
 
 
+### Langkah 3 — Membuat Class Plan
+Membuat class `Plan` untuk menyimpan daftar tugas (`tasks`) dan nama rencana (`name`). Class ini merepresentasikan satu perencanaan kegiatan.
+
+![Langkah ke 3](image/Screenshot%202025-10-29%20143643.png)
