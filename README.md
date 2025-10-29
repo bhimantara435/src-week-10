@@ -26,3 +26,9 @@ Membuat class `Task` pada folder `models/` untuk merepresentasikan satu tugas de
 Membuat class `Plan` untuk menyimpan daftar tugas (`tasks`) dan nama rencana (`name`). Class ini merepresentasikan satu perencanaan kegiatan.
 
 ![Langkah ke 3](image/Screenshot%202025-10-29%20143643.png)
+
+### Langkah 4
+Membuat file `data_layer.dart` berisi class `Plan` dan `Task` untuk mendefinisikan struktur data rencana dan tugas.
+
+
+![Langkah ke 4](image/Screenshot%202025-10-29%20144448.png)
