@@ -76,3 +76,8 @@ Menambahkan properti controller dan keyboardDismissBehavior pada ListView agar p
 
 
 ![Langkah ke 12](image/Screenshot%202025-10-29%20150057.png)
+
+### Langkah 13
+Menambahkan method dispose() untuk membersihkan ScrollController saat widget tidak digunakan lagi.
+
+![Langkah ke 13](image/Screenshot%202025-10-29%20150200.png)
