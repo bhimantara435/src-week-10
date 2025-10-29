@@ -88,3 +88,20 @@ Menjalankan aplikasi Flutter menggunakan perintah flutter run, kemudian menguji 
 
 ![Langkah ke 14](image/1222.jpg)
 
+### Tugas Praktikum 
+
+1. Maksud Langkah 4
+
+Langkah 4 bertujuan membuat file data_layer.dart yang berisi class Plan dan Task untuk mendefinisikan struktur data aplikasi. Hal ini dilakukan agar logika data (Model) dipisahkan dari tampilan (View), sehingga kode lebih terstruktur, mudah dikembangkan, dan perubahan data dapat dikelola secara terpusat tanpa memengaruhi UI langsung.
+
+2. Variabel plan di Langkah 6 dan alasan dibuat konstanta
+
+Variabel plan digunakan untuk menyimpan state daftar tugas yang sedang aktif. Pada awalnya dibuat sebagai konstanta (const Plan()) agar Flutter dapat mengoptimalkan penggunaan memori dan memastikan nilai awal aman serta stabil sebelum pengguna menambah atau mengubah task menggunakan setState(). Hal ini juga mencegah kesalahan null atau error saat build pertama kali.
+
+3. Hasil Langkah 9
+
+Pada langkah 9 dibuat widget _buildTaskTile() yang menampilkan setiap task dalam bentuk ListTile dengan Checkbox dan TextFormField. Fungsi ini memungkinkan pengguna menandai task selesai atau mengubah deskripsinya secara langsung, sehingga daftar tugas menjadi interaktif dan dinamis. Hasil capture GIF menunjukkan bagaimana task dapat ditambah, diedit, dan dicentang, dengan tampilan UI langsung terupdate.
+
+4. Kegunaan method Langkah 11 dan 13 dalam lifecycle state
+
+Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollController dan menambahkan listener, sehingga saat user melakukan scroll semua TextField kehilangan fokus dan keyboard otomatis tertutup. Sedangkan dispose() pada langkah 13 dipanggil ketika widget dihapus dari widget tree untuk membersihkan resource, mencegah memory leak, dan memastikan manajemen lifecycle widget berjalan dengan baik sesuai prinsip Flutter.
