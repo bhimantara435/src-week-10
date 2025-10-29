@@ -13,6 +13,10 @@ class PlanScreen extends StatefulWidget {
 class _PlanScreenState extends State<PlanScreen> {
   Plan plan = const Plan();
 
+  // Langkah 10: Menambahkan ScrollController untuk mengatur perilaku scroll
+  // Tujuannya agar keyboard tertutup otomatis saat pengguna melakukan scroll
+  late ScrollController scrollController;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
