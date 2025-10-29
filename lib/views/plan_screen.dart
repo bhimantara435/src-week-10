@@ -17,6 +17,17 @@ class _PlanScreenState extends State<PlanScreen> {
   // Tujuannya agar keyboard tertutup otomatis saat pengguna melakukan scroll
   late ScrollController scrollController;
 
+  // Langkah 11: Inisialisasi ScrollController dan menambahkan listener
+  // Setiap kali user scroll, semua TextField akan kehilangan fokus (keyboard tertutup)
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController()
+      ..addListener(() {
+        FocusScope.of(context).requestFocus(FocusNode());
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
