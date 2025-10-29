@@ -50,3 +50,8 @@ Menambahkan inisialisasi objek Plan dan membuat tombol tambah tugas (FloatingAct
 
 ![Langkah ke 7](image/Screenshot%202025-10-29%20145402.png)
 
+### Langkah 8
+Menambahkan ListView untuk menampilkan daftar tugas secara dinamis.
+
+
+![Langkah ke 8](image/Screenshot%202025-10-29%20145538.png)
