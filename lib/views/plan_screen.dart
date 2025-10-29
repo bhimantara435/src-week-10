@@ -28,6 +28,13 @@ class _PlanScreenState extends State<PlanScreen> {
       });
   }
 
+  // Langkah 13: Membersihkan resource ScrollController saat widget dihapus
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
