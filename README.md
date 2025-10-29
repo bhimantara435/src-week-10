@@ -65,3 +65,8 @@ Menambahkan widget ListTile dengan Checkbox dan TextFormField untuk setiap item 
 Menambahkan ScrollController untuk mengatur perilaku scroll agar keyboard tertutup otomatis saat user menggulir layar.
 
 ![Langkah ke 10](image/Screenshot%202025-10-29%20145843.png)
+
+### Langkah 11
+Menambahkan method initState() untuk menginisialisasi ScrollController dan menambahkan listener.
+
+![Langkah ke 11](image/Screenshot%202025-10-29%20145952.png)
