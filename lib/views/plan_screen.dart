@@ -54,9 +54,14 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // Langkah 8: Menampilkan daftar task secara dinamis menggunakan ListView
+  // Langkah 8 & 12: Menampilkan daftar task secara dinamis menggunakan ListView
   Widget _buildList() {
     return ListView.builder(
+      controller: scrollController, // Langkah 12: tambahkan controller
+      keyboardDismissBehavior:
+          Theme.of(context).platform == TargetPlatform.iOS
+              ? ScrollViewKeyboardDismissBehavior.onDrag
+              : ScrollViewKeyboardDismissBehavior.manual,
       itemCount: plan.tasks.length,
       itemBuilder: (context, index) =>
           _buildTaskTile(plan.tasks[index], index),
