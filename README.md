@@ -81,3 +81,10 @@ Menambahkan properti controller dan keyboardDismissBehavior pada ListView agar p
 Menambahkan method dispose() untuk membersihkan ScrollController saat widget tidak digunakan lagi.
 
 ![Langkah ke 13](image/Screenshot%202025-10-29%20150200.png)
+
+
+### Langkah 14 – Jalankan dan Uji Aplikasi
+Menjalankan aplikasi Flutter menggunakan perintah flutter run, kemudian menguji semua fitur.
+
+![Langkah ke 14](image/1222.jpg)
+
