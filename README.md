@@ -44,3 +44,9 @@ Membuat StatefulWidget bernama PlanScreen sebagai dasar tampilan utama.
 ![Langkah ke 6](image/Screenshot%202025-10-29%20144707.png)
 
 
+### Langkah 7
+Menambahkan inisialisasi objek Plan dan membuat tombol tambah tugas (FloatingActionButton).
+
+
+![Langkah ke 7](image/Screenshot%202025-10-29%20145402.png)
+
