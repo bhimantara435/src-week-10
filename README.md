@@ -60,3 +60,8 @@ Menambahkan ListView untuk menampilkan daftar tugas secara dinamis.
 ### Langkah 9
 Menambahkan widget ListTile dengan Checkbox dan TextFormField untuk setiap item tugas.
 ![Langkah ke 9](image/Screenshot%202025-10-29%20145731.png)
+
+### Langkah 10
+Menambahkan ScrollController untuk mengatur perilaku scroll agar keyboard tertutup otomatis saat user menggulir layar.
+
+![Langkah ke 10](image/Screenshot%202025-10-29%20145843.png)
