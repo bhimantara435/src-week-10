@@ -32,3 +32,8 @@ Membuat file `data_layer.dart` berisi class `Plan` dan `Task` untuk mendefinisik
 
 
 ![Langkah ke 4](image/Screenshot%202025-10-29%20144448.png)
+
+### Langkah 5
+Membuat file `plan_screen.dart` di folder `screens` sebagai tampilan utama aplikasi.
+
+![Langkah ke 5](image/Screenshot%202025-10-29%20144707.png)
