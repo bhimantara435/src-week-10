@@ -70,3 +70,9 @@ Menambahkan ScrollController untuk mengatur perilaku scroll agar keyboard tertut
 Menambahkan method initState() untuk menginisialisasi ScrollController dan menambahkan listener.
 
 ![Langkah ke 11](image/Screenshot%202025-10-29%20145952.png)
+
+### Langkah 12
+Menambahkan properti controller dan keyboardDismissBehavior pada ListView agar pengalaman input lebih nyaman di iOS/Android.
+
+
+![Langkah ke 12](image/Screenshot%202025-10-29%20150057.png)
