@@ -37,3 +37,10 @@ Membuat file `data_layer.dart` berisi class `Plan` dan `Task` untuk mendefinisik
 Membuat file `plan_screen.dart` di folder `screens` sebagai tampilan utama aplikasi.
 
 ![Langkah ke 5](image/Screenshot%202025-10-29%20144707.png)
+
+### Langkah 6
+Membuat StatefulWidget bernama PlanScreen sebagai dasar tampilan utama.
+
+![Langkah ke 6](image/Screenshot%202025-10-29%20144707.png)
+
+
