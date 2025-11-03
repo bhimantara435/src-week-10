@@ -10,11 +10,12 @@ class MasterPlanApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.purple),
-      home: PlanProvider(
-        notifier: ValueNotifier<Plan>(const Plan()),
-        child: const PlanScreen(),
+    return PlanProvider(
+      notifier: ValueNotifier<List<Plan>>(const []), // menggunakan List<Plan>
+      child: MaterialApp(
+        title: 'State management app',
+        theme: ThemeData(primarySwatch: Colors.purple),
+        home: const PlanScreen(),
       ),
     );
   }
