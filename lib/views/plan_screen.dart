@@ -29,7 +29,7 @@ class _PlanScreenState extends State<PlanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final plan = PlanProvider.of(context).value; // gunakan .value karena PlanProvider memakai ValueNotifier
+    final plan = PlanProvider.of(context).value;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Master Plan Bhimantara')),
@@ -38,7 +38,7 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // Langkah 5: versi baru dengan parameter BuildContext dan PlanProvider
+  // ✅ Langkah 5: Tambah task baru menggunakan PlanProvider
   Widget _buildAddTaskButton(BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return FloatingActionButton(
@@ -53,7 +53,7 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // ListView yang menampilkan semua task
+  // ListView untuk menampilkan semua task
   Widget _buildList(BuildContext context, Plan plan) {
     return ListView.builder(
       controller: scrollController,
@@ -63,33 +63,40 @@ class _PlanScreenState extends State<PlanScreen> {
               : ScrollViewKeyboardDismissBehavior.manual,
       itemCount: plan.tasks.length,
       itemBuilder: (context, index) =>
-          _buildTaskTile(context, plan, plan.tasks[index], index),
+          _buildTaskTile(plan.tasks[index], index, context), // urutan sesuai instruksi
     );
   }
 
-  // Tiap item daftar task
-  Widget _buildTaskTile(
-      BuildContext context, Plan plan, Task task, int index) {
+  // Langkah 6: Method _buildTaskTile versi baru
+  Widget _buildTaskTile(Task task, int index, BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
-
     return ListTile(
       leading: Checkbox(
         value: task.complete,
         onChanged: (selected) {
-          final tasks = List<Task>.from(plan.tasks)
-            ..[index] = Task(
-              description: task.description,
-              complete: selected ?? false,
-            );
-          planNotifier.value = Plan(name: plan.name, tasks: tasks);
+          Plan currentPlan = planNotifier.value;
+          planNotifier.value = Plan(
+            name: currentPlan.name,
+            tasks: List<Task>.from(currentPlan.tasks)
+              ..[index] = Task(
+                description: task.description,
+                complete: selected ?? false,
+              ),
+          );
         },
       ),
       title: TextFormField(
         initialValue: task.description,
         onChanged: (text) {
-          final tasks = List<Task>.from(plan.tasks)
-            ..[index] = Task(description: text, complete: task.complete);
-          planNotifier.value = Plan(name: plan.name, tasks: tasks);
+          Plan currentPlan = planNotifier.value;
+          planNotifier.value = Plan(
+            name: currentPlan.name,
+            tasks: List<Task>.from(currentPlan.tasks)
+              ..[index] = Task(
+                description: text,
+                complete: task.complete,
+              ),
+          );
         },
       ),
     );
