@@ -3,7 +3,9 @@ import '../models/data_layer.dart';
 import '../provider/plan_provider.dart';
 
 class PlanScreen extends StatefulWidget {
-  const PlanScreen({super.key});
+  final Plan plan; // Tambahan dari Langkah 3: menyimpan plan yang sedang digunakan
+
+  const PlanScreen({super.key, required this.plan});
 
   @override
   State createState() => _PlanScreenState();
@@ -29,18 +31,14 @@ class _PlanScreenState extends State<PlanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Langkah 9: Gunakan ValueListenableBuilder agar UI otomatis terupdate ketika Plan berubah
     return Scaffold(
-      appBar: AppBar(title: const Text('Master Plan Bhimantara')),
+      appBar: AppBar(title: Text('Master Plan - ${widget.plan.name}')),
       body: ValueListenableBuilder<Plan>(
         valueListenable: PlanProvider.of(context),
         builder: (context, plan, child) {
           return Column(
             children: [
-              // Expanded: agar daftar task memenuhi ruang di atas footer
               Expanded(child: _buildList(plan)),
-
-              // SafeArea: menampilkan progress (completenessMessage) di bagian bawah layar
               SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
@@ -61,7 +59,7 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // Langkah 5: Tombol untuk menambah task baru menggunakan PlanProvider
+  // Tombol tambah task
   Widget _buildAddTaskButton(BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return FloatingActionButton(
@@ -76,7 +74,7 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // Langkah 7: Menampilkan daftar task dalam bentuk ListView
+  // ListView menampilkan semua task
   Widget _buildList(Plan plan) {
     return ListView.builder(
       controller: scrollController,
@@ -86,7 +84,7 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // Langkah 6: Widget untuk tiap item task
+  // Tiap baris task
   Widget _buildTaskTile(Task task, int index, BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return ListTile(
