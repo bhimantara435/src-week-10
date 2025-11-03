@@ -30,6 +30,25 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
     );
   }
 
+  // Langkah 12 – Tambahkan widget _buildListCreator()
+  Widget _buildListCreator() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Material(
+        color: Theme.of(context).cardColor,
+        elevation: 10,
+        child: TextField(
+          controller: textController,
+          decoration: const InputDecoration(
+            labelText: 'Add a plan',
+            contentPadding: EdgeInsets.all(20),
+          ),
+          onEditingComplete: addPlan,
+        ),
+      ),
+    );
+  }
+
   @override
   void dispose() {
     // Langkah 10 – Membersihkan controller untuk mencegah kebocoran memori
