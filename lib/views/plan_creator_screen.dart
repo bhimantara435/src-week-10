@@ -15,6 +15,21 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
   // Langkah 10 – Membuat controller untuk mengatur input teks
   final textController = TextEditingController();
 
+  // Langkah 11 – Tambahkan method build()
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // Ganti "Namaku" dengan nama kamu sendiri
+      appBar: AppBar(title: const Text('Master Plans Bhimantara')),
+      body: Column(
+        children: [
+          _buildListCreator(),
+          Expanded(child: _buildMasterPlans()),
+        ],
+      ),
+    );
+  }
+
   @override
   void dispose() {
     // Langkah 10 – Membersihkan controller untuk mencegah kebocoran memori
