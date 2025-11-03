@@ -9,6 +9,8 @@
 
 ---
 
+### Praktikum 1
+
 ### Langkah 1 — Membuat Struktur Folder dan File Utama
 
 Pada langkah pertama, dilakukan pembuatan struktur awal proyek Flutter menggunakan perintah:
@@ -88,7 +90,7 @@ Menjalankan aplikasi Flutter menggunakan perintah flutter run, kemudian menguji 
 
 ![Langkah ke 14](image/1222.jpg)
 
-### Tugas Praktikum 
+### Tugas Praktikum 1
 
 1. Maksud Langkah 4
 
@@ -105,3 +107,13 @@ Pada langkah 9 dibuat widget _buildTaskTile() yang menampilkan setiap task dalam
 4. Kegunaan method Langkah 11 dan 13 dalam lifecycle state
 
 Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollController dan menambahkan listener, sehingga saat user melakukan scroll semua TextField kehilangan fokus dan keyboard otomatis tertutup. Sedangkan dispose() pada langkah 13 dipanggil ketika widget dihapus dari widget tree untuk membersihkan resource, mencegah memory leak, dan memastikan manajemen lifecycle widget berjalan dengan baik sesuai prinsip Flutter.
+
+
+
+
+### Praktikum 2
+
+### Langkah 1 — Membuat Folder provider dan File provider
+* folder dan file
+  ![Langkah ke 1](image/Screenshot%202025-11-03%20204459.png)
+  ![Langkah ke 1](image/Screenshot%202025-11-03%20204544.png)
