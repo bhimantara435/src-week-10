@@ -102,47 +102,48 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
+  // Langkah 8 – Ubah method _buildTaskTile agar sesuai dengan List<Plan>
+  // Sekarang perubahan task langsung memperbarui daftar List<Plan> di PlanProvider
   Widget _buildTaskTile(Task task, int index, BuildContext context) {
-    ValueNotifier<List<Plan>> plansNotifier = PlanProvider.of(context);
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+
     return ListTile(
       leading: Checkbox(
         value: task.complete,
         onChanged: (selected) {
-          List<Plan> currentPlans = List.from(plansNotifier.value);
-          int planIndex = currentPlans.indexWhere((p) => p.name == plan.name);
+          Plan currentPlan = plan;
+          int planIndex =
+              planNotifier.value.indexWhere((p) => p.name == currentPlan.name);
 
-          if (planIndex != -1) {
-            Plan updatedPlan = Plan(
-              name: currentPlans[planIndex].name,
-              tasks: List<Task>.from(currentPlans[planIndex].tasks)
+          // Perbarui daftar plan dengan menyalin seluruh data lalu ubah task sesuai index
+          planNotifier.value = List<Plan>.from(planNotifier.value)
+            ..[planIndex] = Plan(
+              name: currentPlan.name,
+              tasks: List<Task>.from(currentPlan.tasks)
                 ..[index] = Task(
                   description: task.description,
                   complete: selected ?? false,
                 ),
             );
-            currentPlans[planIndex] = updatedPlan;
-            plansNotifier.value = currentPlans;
-          }
         },
       ),
       title: TextFormField(
         initialValue: task.description,
         onChanged: (text) {
-          List<Plan> currentPlans = List.from(plansNotifier.value);
-          int planIndex = currentPlans.indexWhere((p) => p.name == plan.name);
+          Plan currentPlan = plan;
+          int planIndex =
+              planNotifier.value.indexWhere((p) => p.name == currentPlan.name);
 
-          if (planIndex != -1) {
-            Plan updatedPlan = Plan(
-              name: currentPlans[planIndex].name,
-              tasks: List<Task>.from(currentPlans[planIndex].tasks)
+          // Setiap kali teks berubah, buat salinan daftar plan baru dengan task yang diperbarui
+          planNotifier.value = List<Plan>.from(planNotifier.value)
+            ..[planIndex] = Plan(
+              name: currentPlan.name,
+              tasks: List<Task>.from(currentPlan.tasks)
                 ..[index] = Task(
                   description: text,
                   complete: task.complete,
                 ),
             );
-            currentPlans[planIndex] = updatedPlan;
-            plansNotifier.value = currentPlans;
-          }
         },
       ),
     );
