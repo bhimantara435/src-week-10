@@ -253,4 +253,38 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 ![Langkah ke 14](image/Screenshot%202025-11-03%20234248.png)
 
 
+### Hasil :
 
+![Hasil](image/Gambar%20WhatsApp%202025-11-04%20pukul%2000.01.27_2aafc11f.jpg)
+
+Pada langkah ini, aplikasi menampilkan daftar plan yang telah dibuat. Setiap plan menampilkan nama dan jumlah task yang sudah diselesaikan. Ketika pengguna mengetikkan nama plan di kolom “Add a plan” lalu menekan Enter, plan baru otomatis muncul di daftar. Tampilan akhir memperlihatkan daftar plan seperti “Try to take over the world” atau “Learn Flutter” dengan status progresnya masing-masing.
+
+
+
+
+2. Penjelasan maksud dari gambar diagram
+
+Diagram tersebut menjelaskan alur navigasi dan struktur widget pada aplikasi Flutter yang telah dibuat dalam Praktikum 3:
+
+#Bagian kiri (PlanCreatorScreen)
+Menunjukkan struktur widget yang aktif saat pengguna membuat rencana baru (PlanCreatorScreen):
+MaterialApp → root dari aplikasi.
+PlanProvider → penyedia data (state management) yang menyimpan daftar plan.
+PlanCreatorScreen → halaman untuk menambahkan plan baru.
+Di dalamnya terdapat:
+Column → menyusun komponen secara vertikal.
+TextField → tempat pengguna mengetik nama plan baru.
+Expanded → ListView → menampilkan daftar task yang ingin dimasukkan ke dalam plan.
+
+#Bagian kanan (PlanScreen)
+Menunjukkan struktur widget ketika pengguna kembali ke halaman utama (PlanScreen) setelah menambahkan plan:
+MaterialApp → root utama aplikasi.\
+PlanScreen → halaman utama yang menampilkan seluruh plan.
+Scaffold → struktur dasar halaman (app bar, body, dsb).
+Column → menyusun elemen secara vertikal.
+Expanded → ListView → menampilkan daftar plan yang tersimpan.
+SafeArea & Text → memastikan teks tampil aman dari area layar (notch) dan menampilkan keterangan seperti “Add a plan”.
+
+#Navigator Push
+Anak panah di tengah (Navigator Push) menandakan bahwa ketika pengguna menekan tombol “Add a plan”, aplikasi akan berpindah (navigate) dari PlanScreen ke PlanCreatorScreen.
+Setelah menambahkan plan baru dan kembali, data diperbarui di halaman utama.
