@@ -248,4 +248,9 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 * Tambahkan Parameter
 ![Langkah ke 13](image/Screenshot%202025-11-03%20233328.png)
 
+### Langkah 14: Buat widget _buildMasterPlans()
+* Tambahkan Parameter
+![Langkah ke 14](image/Screenshot%202025-11-03%20234248.png)
+
+
 
