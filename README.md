@@ -184,9 +184,8 @@ int get completedCount => tasks
 
 String get completenessMessage =>
     '$completedCount out of ${tasks.length} tasks';
+ ```
 
-
----
 
 ### Praktikum 3 : Membuat State di Multiple Screens
 
