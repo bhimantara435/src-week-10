@@ -186,4 +186,16 @@ String get completenessMessage =>
     '$completedCount out of ${tasks.length} tasks';
 
 
+---
+
+### Praktikum 3 : Membuat State di Multiple Screens
+
+### Langkah 1: Edit PlanProvider
+* edit code
+  ![Langkah ke 1](image/Screenshot%202025-11-03%20224931.png)
+
+  Error itu muncul karena kamu mengubah PlanProvider agar menyimpan daftar plan (List<Plan>), sementara kode lain masih menganggap isinya hanya satu plan (Plan). Akibatnya, bagian seperti plan.tasks jadi tidak cocok dengan tipe datanya dan memunculkan error. Jadi, penyebabnya karena ketidaksesuaian tipe data. Solusinya, kamu bisa sesuaikan semua kode agar mendukung banyak plan sekaligus, atau kembalikan PlanProvider seperti semula kalau kamu cuma butuh satu plan saja.
+
+
+
 
