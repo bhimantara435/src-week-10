@@ -196,6 +196,9 @@ String get completenessMessage =>
 
   Error itu muncul karena kamu mengubah PlanProvider agar menyimpan daftar plan (List<Plan>), sementara kode lain masih menganggap isinya hanya satu plan (Plan). Akibatnya, bagian seperti plan.tasks jadi tidak cocok dengan tipe datanya dan memunculkan error. Jadi, penyebabnya karena ketidaksesuaian tipe data. Solusinya, kamu bisa sesuaikan semua kode agar mendukung banyak plan sekaligus, atau kembalikan PlanProvider seperti semula kalau kamu cuma butuh satu plan saja.
 
+### Langkah 2: Edit main.dart
+* edit main
+![Langkah ke 2](image/Screenshot%202025-11-03%20225142.png)
 
 
 
