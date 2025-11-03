@@ -147,6 +147,9 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
 * edit method
   ![Langkah ke 8](image/Screenshot%202025-11-03%20214135.png)
 
+### Langkah 9: Tambah widget SafeArea
+* Menambahkan widget SafeArea
+  ![Langkah ke 9](image/Screenshot%202025-11-03%20214457.png)
 
 
 
