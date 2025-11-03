@@ -200,5 +200,12 @@ String get completenessMessage =>
 * edit main
 ![Langkah ke 2](image/Screenshot%202025-11-03%20225142.png)
 
+### Langkah 3: Edit plan_screen.dart
+* Edit code
+![Langkah ke 3](image/Screenshot%202025-11-03%20225536.png)
+
+
+
+
 
 
