@@ -231,7 +231,7 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 ### Langkah 9: Buat screen baru
 * buat file baru dan isi dengan kode
 ![Langkah ke 9](image/Screenshot%202025-11-03%20232239.png)
-
+ 
 ### Langkah 10: Pindah ke class _PlanCreatorScreenState
 * Tambahkan Parameter
 ![Langkah ke 10](image/Screenshot%202025-11-03%20232440.png)
@@ -240,6 +240,9 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 * Tambahkan Parameter
 ![Langkah ke 11](image/Screenshot%202025-11-03%20232758.png)
 
+### Langkah 12: Buat widget _buildListCreator
+* Tambahkan Parameter
+![Langkah ke 12](image/Screenshot%202025-11-03%20233128.png)
 
 
 
