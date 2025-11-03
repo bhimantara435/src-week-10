@@ -143,7 +143,9 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
   * Menambahkan parameter buildlist
    ![Langkah ke 7](image/Screenshot%202025-11-03%20211058.png)
 
-
+### Langkah 8: Tetap di class PlanScreen
+* edit method
+  ![Langkah ke 8](image/Screenshot%202025-11-03%20214135.png)
 
 
 
