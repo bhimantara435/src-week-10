@@ -20,6 +20,10 @@ class _PlanScreenState extends State<PlanScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Langkah 6 – Inisialisasi ScrollController
+    // ScrollController digunakan untuk memantau pergerakan daftar (ListView)
+    // addListener() memastikan keyboard akan otomatis tertutup saat pengguna menggulir layar
     scrollController = ScrollController()
       ..addListener(() {
         FocusScope.of(context).requestFocus(FocusNode());
