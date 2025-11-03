@@ -127,3 +127,6 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
  * Menambahkan code ke dalam file plan.dart
   ![Langkah ke 3](image/Screenshot%202025-11-03%20205323.png)
 
+### Langkah 4: Pindah ke PlanScreen
+* hapus code
+  ![Langkah ke 4](image/Screenshot%202025-11-03%20205825.png)
