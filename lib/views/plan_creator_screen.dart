@@ -15,6 +15,24 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
   // Langkah 10 – Membuat controller untuk mengatur input teks
   final textController = TextEditingController();
 
+  // Langkah 13 – Tambahkan method addPlan()
+  void addPlan() {
+    final text = textController.text;
+
+    if (text.isEmpty) {
+      return;
+    }
+
+    final plan = Plan(name: text, tasks: []);
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+
+    planNotifier.value = List<Plan>.from(planNotifier.value)..add(plan);
+
+    textController.clear();
+    FocusScope.of(context).requestFocus(FocusNode());
+    setState(() {});
+  }
+
   // Langkah 11 – Tambahkan method build()
   @override
   Widget build(BuildContext context) {
@@ -56,3 +74,4 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
     super.dispose();
   }
 }
+  
