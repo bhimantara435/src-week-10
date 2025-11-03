@@ -134,3 +134,13 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
 ### Langkah 5: Edit method _buildAddTaskButton
 * Edit method dalam file plan_screen
   ![Langkah ke 5](image/Screenshot%202025-11-03%20210250.png)
+
+### Langkah 6: Edit method _buildTaskTile
+* Menambahkan parameter BuildContext context, Ganti TextField menjadi TextFormField.
+  ![Langkah ke 6](image/Screenshot%202025-11-03%20210742.png)
+
+
+
+
+
+
