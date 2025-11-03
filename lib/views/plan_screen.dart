@@ -3,7 +3,7 @@ import '../models/data_layer.dart';
 import '../provider/plan_provider.dart';
 
 class PlanScreen extends StatefulWidget {
-  final Plan plan; // Tambahan dari Langkah 3: menyimpan plan yang sedang digunakan
+  final Plan plan; // Menyimpan plan yang sedang digunakan
 
   const PlanScreen({super.key, required this.plan});
 
@@ -13,6 +13,9 @@ class PlanScreen extends StatefulWidget {
 
 class _PlanScreenState extends State<PlanScreen> {
   late ScrollController scrollController;
+
+  // Langkah 5 – Getter untuk mengakses plan dengan mudah
+  Plan get plan => widget.plan;
 
   @override
   void initState() {
@@ -32,7 +35,7 @@ class _PlanScreenState extends State<PlanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Master Plan - ${widget.plan.name}')),
+      appBar: AppBar(title: Text('Master Plan - ${plan.name}')), // pakai getter plan
       body: ValueListenableBuilder<Plan>(
         valueListenable: PlanProvider.of(context),
         builder: (context, plan, child) {
@@ -59,7 +62,6 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // Tombol tambah task
   Widget _buildAddTaskButton(BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return FloatingActionButton(
@@ -74,7 +76,6 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // ListView menampilkan semua task
   Widget _buildList(Plan plan) {
     return ListView.builder(
       controller: scrollController,
@@ -84,7 +85,6 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // Tiap baris task
   Widget _buildTaskTile(Task task, int index, BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return ListTile(
