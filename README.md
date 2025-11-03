@@ -152,6 +152,10 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
   ![Langkah ke 9](image/Screenshot%202025-11-03%20214457.png)
 
 
+ ### Hasil :
+   ![Hasil](image/Gambar%20WhatsApp%202025-11-03%20pukul%2021.47.40_e14ee255.jpg)
+
+
 
 
 
