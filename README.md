@@ -139,6 +139,12 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
 * Menambahkan parameter BuildContext context, Ganti TextField menjadi TextFormField.
   ![Langkah ke 6](image/Screenshot%202025-11-03%20210742.png)
 
+  ### Langkah 7: Edit _buildList
+  * Menambahkan parameter buildlist
+   ![Langkah ke 7](image/Screenshot%202025-11-03%20211058.png)
+
+
+
 
 
 
