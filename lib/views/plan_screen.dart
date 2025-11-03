@@ -29,41 +29,45 @@ class _PlanScreenState extends State<PlanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final plan = PlanProvider.of(context).value;
-
+    // Langkah 9: Gunakan ValueListenableBuilder agar UI otomatis terupdate ketika Plan berubah
     return Scaffold(
       appBar: AppBar(title: const Text('Master Plan Bhimantara')),
-      //  Langkah 8: Ubah body menjadi Column
-      body: Column(
-        children: [
-          //  membungkus daftar task dengan Expanded agar ListView mengisi ruang tersisa
-          Expanded(child: _buildList(plan)),
+      body: ValueListenableBuilder<Plan>(
+        valueListenable: PlanProvider.of(context),
+        builder: (context, plan, child) {
+          return Column(
+            children: [
+              // Expanded: agar daftar task memenuhi ruang di atas footer
+              Expanded(child: _buildList(plan)),
 
-          // menambahkan footer progress di bagian bawah layar
-          Container(
-            padding: const EdgeInsets.all(16),
-            color: Colors.purple.shade50, // warna latar lembut
-            width: double.infinity,
-            child: Text(
-              plan.completenessMessage, // menampilkan "x out of y tasks"
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-          ),
-        ],
+              // SafeArea: menampilkan progress (completenessMessage) di bagian bawah layar
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    plan.completenessMessage,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
       floatingActionButton: _buildAddTaskButton(context),
     );
   }
 
-  //  Langkah 5: Tombol tambah task baru
+  // Langkah 5: Tombol untuk menambah task baru menggunakan PlanProvider
   Widget _buildAddTaskButton(BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return FloatingActionButton(
       child: const Icon(Icons.add),
       onPressed: () {
         Plan currentPlan = planNotifier.value;
-        // setiap kali tombol ditekan, tambahkan task kosong baru ke daftar
         planNotifier.value = Plan(
           name: currentPlan.name,
           tasks: List<Task>.from(currentPlan.tasks)..add(const Task()),
@@ -72,28 +76,26 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // Langkah 7: ListView builder
+  // Langkah 7: Menampilkan daftar task dalam bentuk ListView
   Widget _buildList(Plan plan) {
     return ListView.builder(
       controller: scrollController,
       itemCount: plan.tasks.length,
       itemBuilder: (context, index) =>
-          _buildTaskTile(plan.tasks[index], index, context), // kirim context ke _buildTaskTile
+          _buildTaskTile(plan.tasks[index], index, context),
     );
   }
 
-  //  Langkah 6: Tiap item daftar task
+  // Langkah 6: Widget untuk tiap item task
   Widget _buildTaskTile(Task task, int index, BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return ListTile(
-      // Checkbox untuk menandai task selesai atau belum
       leading: Checkbox(
         value: task.complete,
         onChanged: (selected) {
           Plan currentPlan = planNotifier.value;
           planNotifier.value = Plan(
             name: currentPlan.name,
-            // perbarui status task ke true/false sesuai input user
             tasks: List<Task>.from(currentPlan.tasks)
               ..[index] = Task(
                 description: task.description,
@@ -102,14 +104,12 @@ class _PlanScreenState extends State<PlanScreen> {
           );
         },
       ),
-      // TextFormField untuk mengubah deskripsi task
       title: TextFormField(
         initialValue: task.description,
         onChanged: (text) {
           Plan currentPlan = planNotifier.value;
           planNotifier.value = Plan(
             name: currentPlan.name,
-            // simpan teks baru ke task sesuai index
             tasks: List<Task>.from(currentPlan.tasks)
               ..[index] = Task(
                 description: text,
