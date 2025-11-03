@@ -117,3 +117,8 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
 * folder dan file
   ![Langkah ke 1](image/Screenshot%202025-11-03%20204459.png)
   ![Langkah ke 1](image/Screenshot%202025-11-03%20204544.png)
+
+
+### Langkah 2: Edit main.dart
+* edit
+  ![Langkah ke 2](image/Screenshot%202025-11-03%20205026.png)
