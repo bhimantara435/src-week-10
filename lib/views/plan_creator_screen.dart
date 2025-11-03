@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/data_layer.dart';
-import '../models/plan_provider.dart';
+import '../provider/plan_provider.dart';
 import 'plan_screen.dart';
 
 class PlanCreatorScreen extends StatefulWidget {
@@ -10,34 +10,14 @@ class PlanCreatorScreen extends StatefulWidget {
   State<PlanCreatorScreen> createState() => _PlanCreatorScreenState();
 }
 
-// Langkah 10 – Tambahkan class _PlanCreatorScreenState
 class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
-  // Langkah 10 – Membuat controller untuk mengatur input teks
+  // Controller untuk mengatur input teks
   final textController = TextEditingController();
 
-  // Langkah 13 – Tambahkan method addPlan()
-  void addPlan() {
-    final text = textController.text;
-
-    if (text.isEmpty) {
-      return;
-    }
-
-    final plan = Plan(name: text, tasks: []);
-    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
-
-    planNotifier.value = List<Plan>.from(planNotifier.value)..add(plan);
-
-    textController.clear();
-    FocusScope.of(context).requestFocus(FocusNode());
-    setState(() {});
-  }
-
-  // Langkah 11 – Tambahkan method build()
+  // Membentuk tampilan utama
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Ganti "Namaku" dengan nama kamu sendiri
       appBar: AppBar(title: const Text('Master Plans Bhimantara')),
       body: Column(
         children: [
@@ -48,7 +28,7 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
     );
   }
 
-  // Langkah 12 – Tambahkan widget _buildListCreator()
+  // TextField untuk menambah plan baru
   Widget _buildListCreator() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -67,11 +47,63 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
     );
   }
 
+  // Method untuk menambah Plan ke dalam daftar
+  void addPlan() {
+    final text = textController.text;
+
+    if (text.isEmpty) return;
+
+    final plan = Plan(name: text, tasks: []);
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+
+    planNotifier.value = List<Plan>.from(planNotifier.value)..add(plan);
+
+    textController.clear();
+    FocusScope.of(context).requestFocus(FocusNode());
+    setState(() {});
+  }
+
+  // Menampilkan daftar Plan yang sudah dibuat
+  Widget _buildMasterPlans() {
+    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+    List<Plan> plans = planNotifier.value;
+
+    if (plans.isEmpty) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Icon(Icons.note, size: 100, color: Colors.grey),
+          Text(
+            'Anda belum memiliki rencana apapun.',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ],
+      );
+    }
+
+    return ListView.builder(
+      itemCount: plans.length,
+      itemBuilder: (context, index) {
+        final plan = plans[index];
+        return ListTile(
+          title: Text(plan.name),
+          subtitle: Text(plan.completenessMessage),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => PlanScreen(plan: plan),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // Membersihkan controller agar tidak bocor memori
   @override
   void dispose() {
-    // Langkah 10 – Membersihkan controller untuk mencegah kebocoran memori
     textController.dispose();
     super.dispose();
   }
 }
-  
