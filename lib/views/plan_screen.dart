@@ -33,12 +33,12 @@ class _PlanScreenState extends State<PlanScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Master Plan Bhimantara')),
-      body: _buildList(context, plan),
+      body: _buildList(plan), // 👈 Sekarang cukup kirim plan saja
       floatingActionButton: _buildAddTaskButton(context),
     );
   }
 
-  // ✅ Langkah 5: Tambah task baru menggunakan PlanProvider
+  //  Langkah 5: Tambah task baru menggunakan PlanProvider
   Widget _buildAddTaskButton(BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return FloatingActionButton(
@@ -53,21 +53,17 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  // ListView untuk menampilkan semua task
-  Widget _buildList(BuildContext context, Plan plan) {
+  //  Langkah 7: Perbarui method _buildList sesuai instruksi
+  Widget _buildList(Plan plan) {
     return ListView.builder(
       controller: scrollController,
-      keyboardDismissBehavior:
-          Theme.of(context).platform == TargetPlatform.iOS
-              ? ScrollViewKeyboardDismissBehavior.onDrag
-              : ScrollViewKeyboardDismissBehavior.manual,
       itemCount: plan.tasks.length,
       itemBuilder: (context, index) =>
-          _buildTaskTile(plan.tasks[index], index, context), // urutan sesuai instruksi
+          _buildTaskTile(plan.tasks[index], index, context), // context diteruskan
     );
   }
 
-  // Langkah 6: Method _buildTaskTile versi baru
+  //  Langkah 6: Method _buildTaskTile versi baru
   Widget _buildTaskTile(Task task, int index, BuildContext context) {
     ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return ListTile(
