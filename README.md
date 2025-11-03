@@ -214,6 +214,11 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 ![Langkah ke 5](image/Screenshot%202025-11-03%20230029.png)
 
 
+### Langkah 6: Method initState()
+* Tambah parameter
+![Langkah ke 6](image/Screenshot%202025-11-03%20230457.png)
+
+
 
 
 
