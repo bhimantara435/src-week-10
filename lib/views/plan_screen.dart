@@ -1,7 +1,7 @@
-import '../models/data_layer.dart';
 import 'package:flutter/material.dart';
+import '../models/data_layer.dart';
+import '../provider/plan_provider.dart';
 
-// Langkah 6: Membuat StatefulWidget bernama PlanScreen
 class PlanScreen extends StatefulWidget {
   const PlanScreen({super.key});
 
@@ -9,16 +9,12 @@ class PlanScreen extends StatefulWidget {
   State createState() => _PlanScreenState();
 }
 
-// Langkah 7: Inisialisasi objek Plan dan mulai membangun tampilan dasar
 class _PlanScreenState extends State<PlanScreen> {
-  Plan plan = const Plan();
+  // ⚠️ Langkah 4: variabel plan lokal DIHAPUS
+  // Plan plan = const Plan();
 
-  // Langkah 10: Menambahkan ScrollController untuk mengatur perilaku scroll
-  // Tujuannya agar keyboard tertutup otomatis saat pengguna melakukan scroll
   late ScrollController scrollController;
 
-  // Langkah 11: Inisialisasi ScrollController dan menambahkan listener
-  // Setiap kali user scroll, semua TextField akan kehilangan fokus (keyboard tertutup)
   @override
   void initState() {
     super.initState();
@@ -28,7 +24,6 @@ class _PlanScreenState extends State<PlanScreen> {
       });
   }
 
-  // Langkah 13: Membersihkan resource ScrollController saat widget dihapus
   @override
   void dispose() {
     scrollController.dispose();
@@ -37,77 +32,64 @@ class _PlanScreenState extends State<PlanScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 🔹 Ambil data Plan dari PlanProvider (Langkah 5/6)
+    final plan = PlanProvider.of(context);
+
     return Scaffold(
-      // Langkah 8: Menambahkan AppBar, ListView, dan FloatingActionButton
       appBar: AppBar(title: const Text('Master Plan Bhimantara')),
-      body: _buildList(),
-      floatingActionButton: _buildAddTaskButton(),
+      body: _buildList(plan),
+      floatingActionButton: _buildAddTaskButton(plan),
     );
   }
 
-  // Langkah 7: Membuat method tombol tambah task baru
-  Widget _buildAddTaskButton() {
+  // Tombol untuk menambah task baru
+  Widget _buildAddTaskButton(Plan plan) {
     return FloatingActionButton(
       child: const Icon(Icons.add),
       onPressed: () {
-        setState(() {
-          plan = Plan(
-            name: plan.name,
-            tasks: List<Task>.from(plan.tasks)
-              ..add(const Task()),
-          );
-        });
+        final tasks = List<Task>.from(plan.tasks)..add(const Task());
+        PlanProvider.of(context, listen: false).value =
+            Plan(name: plan.name, tasks: tasks);
       },
     );
   }
 
-  // Langkah 8 & 12: Menampilkan daftar task secara dinamis menggunakan ListView
-  Widget _buildList() {
+  // ListView yang menampilkan semua task
+  Widget _buildList(Plan plan) {
     return ListView.builder(
-      controller: scrollController, // Langkah 12: tambahkan controller
+      controller: scrollController,
       keyboardDismissBehavior:
           Theme.of(context).platform == TargetPlatform.iOS
               ? ScrollViewKeyboardDismissBehavior.onDrag
               : ScrollViewKeyboardDismissBehavior.manual,
       itemCount: plan.tasks.length,
       itemBuilder: (context, index) =>
-          _buildTaskTile(plan.tasks[index], index),
+          _buildTaskTile(plan, plan.tasks[index], index),
     );
   }
 
-  // Langkah 9: Membuat widget ListTile untuk setiap item task
-  Widget _buildTaskTile(Task task, int index) {
+  // Tiap item daftar task
+  Widget _buildTaskTile(Plan plan, Task task, int index) {
     return ListTile(
-      // Checkbox untuk menandai status selesai/tidak
       leading: Checkbox(
         value: task.complete,
         onChanged: (selected) {
-          setState(() {
-            plan = Plan(
-              name: plan.name,
-              tasks: List<Task>.from(plan.tasks)
-                ..[index] = Task(
-                  description: task.description,
-                  complete: selected ?? false,
-                ),
+          final tasks = List<Task>.from(plan.tasks)
+            ..[index] = Task(
+              description: task.description,
+              complete: selected ?? false,
             );
-          });
+          PlanProvider.of(context, listen: false).value =
+              Plan(name: plan.name, tasks: tasks);
         },
       ),
-      // TextFormField untuk menulis/mengubah deskripsi task
       title: TextFormField(
         initialValue: task.description,
         onChanged: (text) {
-          setState(() {
-            plan = Plan(
-              name: plan.name,
-              tasks: List<Task>.from(plan.tasks)
-                ..[index] = Task(
-                  description: text,
-                  complete: task.complete,
-                ),
-            );
-          });
+          final tasks = List<Task>.from(plan.tasks)
+            ..[index] = Task(description: text, complete: task.complete);
+          PlanProvider.of(context, listen: false).value =
+              Plan(name: plan.name, tasks: tasks);
         },
       ),
     );
