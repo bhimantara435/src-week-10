@@ -38,19 +38,26 @@ class _PlanScreenState extends State<PlanScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Langkah 7 – Gunakan ValueNotifier<List<Plan>> untuk menampung beberapa plan
+    // Kode ini mengambil data plan dari PlanProvider dalam bentuk list,
+    // lalu menampilkan plan yang sedang aktif menggunakan ValueListenableBuilder
+    ValueNotifier<List<Plan>> plansNotifier = PlanProvider.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: Text('Master Plan - ${plan.name}')), // pakai getter plan
-      body: ValueListenableBuilder<Plan>(
-        valueListenable: PlanProvider.of(context),
-        builder: (context, plan, child) {
+      appBar: AppBar(title: Text(plan.name)),
+      body: ValueListenableBuilder<List<Plan>>(
+        valueListenable: plansNotifier,
+        builder: (context, plans, child) {
+          // Mengambil plan yang sesuai dengan plan saat ini dari daftar plans
+          Plan currentPlan = plans.firstWhere((p) => p.name == plan.name);
           return Column(
             children: [
-              Expanded(child: _buildList(plan)),
+              Expanded(child: _buildList(currentPlan)),
               SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    plan.completenessMessage,
+                    currentPlan.completenessMessage,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -67,15 +74,21 @@ class _PlanScreenState extends State<PlanScreen> {
   }
 
   Widget _buildAddTaskButton(BuildContext context) {
-    ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
+    ValueNotifier<List<Plan>> plansNotifier = PlanProvider.of(context);
     return FloatingActionButton(
       child: const Icon(Icons.add),
       onPressed: () {
-        Plan currentPlan = planNotifier.value;
-        planNotifier.value = Plan(
-          name: currentPlan.name,
-          tasks: List<Task>.from(currentPlan.tasks)..add(const Task()),
-        );
+        List<Plan> currentPlans = List.from(plansNotifier.value);
+        int index = currentPlans.indexWhere((p) => p.name == plan.name);
+
+        if (index != -1) {
+          Plan updatedPlan = Plan(
+            name: currentPlans[index].name,
+            tasks: List<Task>.from(currentPlans[index].tasks)..add(const Task()),
+          );
+          currentPlans[index] = updatedPlan;
+          plansNotifier.value = currentPlans;
+        }
       },
     );
   }
@@ -90,34 +103,46 @@ class _PlanScreenState extends State<PlanScreen> {
   }
 
   Widget _buildTaskTile(Task task, int index, BuildContext context) {
-    ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
+    ValueNotifier<List<Plan>> plansNotifier = PlanProvider.of(context);
     return ListTile(
       leading: Checkbox(
         value: task.complete,
         onChanged: (selected) {
-          Plan currentPlan = planNotifier.value;
-          planNotifier.value = Plan(
-            name: currentPlan.name,
-            tasks: List<Task>.from(currentPlan.tasks)
-              ..[index] = Task(
-                description: task.description,
-                complete: selected ?? false,
-              ),
-          );
+          List<Plan> currentPlans = List.from(plansNotifier.value);
+          int planIndex = currentPlans.indexWhere((p) => p.name == plan.name);
+
+          if (planIndex != -1) {
+            Plan updatedPlan = Plan(
+              name: currentPlans[planIndex].name,
+              tasks: List<Task>.from(currentPlans[planIndex].tasks)
+                ..[index] = Task(
+                  description: task.description,
+                  complete: selected ?? false,
+                ),
+            );
+            currentPlans[planIndex] = updatedPlan;
+            plansNotifier.value = currentPlans;
+          }
         },
       ),
       title: TextFormField(
         initialValue: task.description,
         onChanged: (text) {
-          Plan currentPlan = planNotifier.value;
-          planNotifier.value = Plan(
-            name: currentPlan.name,
-            tasks: List<Task>.from(currentPlan.tasks)
-              ..[index] = Task(
-                description: text,
-                complete: task.complete,
-              ),
-          );
+          List<Plan> currentPlans = List.from(plansNotifier.value);
+          int planIndex = currentPlans.indexWhere((p) => p.name == plan.name);
+
+          if (planIndex != -1) {
+            Plan updatedPlan = Plan(
+              name: currentPlans[planIndex].name,
+              tasks: List<Task>.from(currentPlans[planIndex].tasks)
+                ..[index] = Task(
+                  description: text,
+                  complete: task.complete,
+                ),
+            );
+            currentPlans[planIndex] = updatedPlan;
+            plansNotifier.value = currentPlans;
+          }
         },
       ),
     );
