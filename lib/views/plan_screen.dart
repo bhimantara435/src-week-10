@@ -10,9 +10,6 @@ class PlanScreen extends StatefulWidget {
 }
 
 class _PlanScreenState extends State<PlanScreen> {
-  // ⚠️ Langkah 4: variabel plan lokal DIHAPUS
-  // Plan plan = const Plan();
-
   late ScrollController scrollController;
 
   @override
@@ -32,30 +29,32 @@ class _PlanScreenState extends State<PlanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // 🔹 Ambil data Plan dari PlanProvider (Langkah 5/6)
-    final plan = PlanProvider.of(context);
+    final plan = PlanProvider.of(context).value; // gunakan .value karena PlanProvider memakai ValueNotifier
 
     return Scaffold(
       appBar: AppBar(title: const Text('Master Plan Bhimantara')),
-      body: _buildList(plan),
-      floatingActionButton: _buildAddTaskButton(plan),
+      body: _buildList(context, plan),
+      floatingActionButton: _buildAddTaskButton(context),
     );
   }
 
-  // Tombol untuk menambah task baru
-  Widget _buildAddTaskButton(Plan plan) {
+  // Langkah 5: versi baru dengan parameter BuildContext dan PlanProvider
+  Widget _buildAddTaskButton(BuildContext context) {
+    ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
     return FloatingActionButton(
       child: const Icon(Icons.add),
       onPressed: () {
-        final tasks = List<Task>.from(plan.tasks)..add(const Task());
-        PlanProvider.of(context, listen: false).value =
-            Plan(name: plan.name, tasks: tasks);
+        Plan currentPlan = planNotifier.value;
+        planNotifier.value = Plan(
+          name: currentPlan.name,
+          tasks: List<Task>.from(currentPlan.tasks)..add(const Task()),
+        );
       },
     );
   }
 
   // ListView yang menampilkan semua task
-  Widget _buildList(Plan plan) {
+  Widget _buildList(BuildContext context, Plan plan) {
     return ListView.builder(
       controller: scrollController,
       keyboardDismissBehavior:
@@ -64,12 +63,15 @@ class _PlanScreenState extends State<PlanScreen> {
               : ScrollViewKeyboardDismissBehavior.manual,
       itemCount: plan.tasks.length,
       itemBuilder: (context, index) =>
-          _buildTaskTile(plan, plan.tasks[index], index),
+          _buildTaskTile(context, plan, plan.tasks[index], index),
     );
   }
 
   // Tiap item daftar task
-  Widget _buildTaskTile(Plan plan, Task task, int index) {
+  Widget _buildTaskTile(
+      BuildContext context, Plan plan, Task task, int index) {
+    ValueNotifier<Plan> planNotifier = PlanProvider.of(context);
+
     return ListTile(
       leading: Checkbox(
         value: task.complete,
@@ -79,8 +81,7 @@ class _PlanScreenState extends State<PlanScreen> {
               description: task.description,
               complete: selected ?? false,
             );
-          PlanProvider.of(context, listen: false).value =
-              Plan(name: plan.name, tasks: tasks);
+          planNotifier.value = Plan(name: plan.name, tasks: tasks);
         },
       ),
       title: TextFormField(
@@ -88,8 +89,7 @@ class _PlanScreenState extends State<PlanScreen> {
         onChanged: (text) {
           final tasks = List<Task>.from(plan.tasks)
             ..[index] = Task(description: text, complete: task.complete);
-          PlanProvider.of(context, listen: false).value =
-              Plan(name: plan.name, tasks: tasks);
+          planNotifier.value = Plan(name: plan.name, tasks: tasks);
         },
       ),
     );
