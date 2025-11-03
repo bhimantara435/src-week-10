@@ -1,17 +1,14 @@
-import './task.dart';
+import 'task.dart';
 
-// Model Plan berisi nama dan daftar tugas
 class Plan {
-  final String name; // nama plan
-  final List<Task> tasks; // daftar tugas
+  String name;
+  final List<Task> tasks;
 
-  const Plan({this.name = '', this.tasks = const []}); // konstruktor
+  Plan({required this.name, required this.tasks});
 
-  // Menghitung jumlah tugas yang sudah selesai
-  int get completedCount =>
-      tasks.where((task) => task.complete).length;
-
-  // Pesan ringkasan progres penyelesaian tugas
-  String get completenessMessage =>
-      '$completedCount out of ${tasks.length} tasks';
+  String get completenessMessage {
+    if (tasks.isEmpty) return 'No tasks';
+    final completed = tasks.where((task) => task.isComplete).length;
+    return '$completed out of ${tasks.length} tasks';
+  }
 }

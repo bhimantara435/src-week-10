@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import './views/plan_creator_screen.dart';
 import './models/data_layer.dart';
 import './provider/plan_provider.dart';
+import './views/plan_creator_screen.dart';
 
 void main() => runApp(const MasterPlanApp());
 
@@ -11,11 +11,28 @@ class MasterPlanApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlanProvider(
-      notifier: ValueNotifier<List<Plan>>(const []), // menggunakan List<Plan>
+      notifier: ValueNotifier<List<Plan>>([
+        Plan(
+          name: 'Try to take over the world',
+          tasks: [
+            Task(isComplete: true),
+            Task(isComplete: false),
+            Task(isComplete: false),
+          ],
+        ),
+        Plan(
+          name: 'Invent New Form of Cheese',
+          tasks: List.generate(14, (_) => Task(isComplete: false)),
+        ),
+        Plan(
+          name: 'Learn Flutter',
+          tasks: List.generate(14, (i) => Task(isComplete: i < 6)),
+        ),
+      ]),
       child: MaterialApp(
         title: 'State management app',
         theme: ThemeData(primarySwatch: Colors.purple),
-        home: const PlanCreatorScreen(), // halaman utama aplikasi
+        home: const PlanCreatorScreen(),
       ),
     );
   }

@@ -11,14 +11,12 @@ class PlanCreatorScreen extends StatefulWidget {
 }
 
 class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
-  // Controller untuk mengatur input teks
   final textController = TextEditingController();
 
-  // Membentuk tampilan utama
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Master Plans Bhimantara')),
+      appBar: AppBar(title: const Text('Master Plans')),
       body: Column(
         children: [
           _buildListCreator(),
@@ -28,7 +26,6 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
     );
   }
 
-  // TextField untuk menambah plan baru
   Widget _buildListCreator() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -47,36 +44,29 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
     );
   }
 
-  // Method untuk menambah Plan ke dalam daftar
   void addPlan() {
     final text = textController.text;
-
     if (text.isEmpty) return;
 
     final plan = Plan(name: text, tasks: []);
-    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
+    final planNotifier = PlanProvider.of(context);
 
     planNotifier.value = List<Plan>.from(planNotifier.value)..add(plan);
-
     textController.clear();
-    FocusScope.of(context).requestFocus(FocusNode());
+    FocusScope.of(context).unfocus();
     setState(() {});
   }
 
-  // Menampilkan daftar Plan yang sudah dibuat
   Widget _buildMasterPlans() {
-    ValueNotifier<List<Plan>> planNotifier = PlanProvider.of(context);
-    List<Plan> plans = planNotifier.value;
+    final planNotifier = PlanProvider.of(context);
+    final plans = planNotifier.value;
 
     if (plans.isEmpty) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Icon(Icons.note, size: 100, color: Colors.grey),
-          Text(
-            'Anda belum memiliki rencana apapun.',
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
+        children: const [
+          Icon(Icons.note, size: 100, color: Colors.grey),
+          Text('Anda belum memiliki rencana apapun.'),
         ],
       );
     }
@@ -90,9 +80,7 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
           subtitle: Text(plan.completenessMessage),
           onTap: () {
             Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => PlanScreen(plan: plan),
-              ),
+              MaterialPageRoute(builder: (_) => PlanScreen(plan: plan)),
             );
           },
         );
@@ -100,7 +88,6 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
     );
   }
 
-  // Membersihkan controller agar tidak bocor memori
   @override
   void dispose() {
     textController.dispose();
