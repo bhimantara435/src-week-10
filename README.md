@@ -232,6 +232,10 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 * buat file baru dan isi dengan kode
 ![Langkah ke 9](image/Screenshot%202025-11-03%20232239.png)
 
+### Langkah 10: Pindah ke class _PlanCreatorScreenState
+* Tambahkan Parameter
+![Langkah ke 10](image/Screenshot%202025-11-03%20232440.png)
+
 
 
 
