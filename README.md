@@ -205,6 +205,9 @@ String get completenessMessage =>
 ![Langkah ke 3](image/Screenshot%202025-11-03%20225536.png)
 
 
+### Langkah 4: Error
+Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan satu objek Plan, sedangkan setelah diubah menjadi List<Plan>, semua bagian kode yang masih memanggil PlanProvider.of(context) dengan asumsi tipe data tunggal menjadi tidak sesuai lagi. Akibatnya, fungsi-fungsi yang mengakses plan atau memodifikasi tugas tidak bisa mengenali struktur baru List<Plan>. Error ini muncul karena perbedaan tipe data antara implementasi lama dan baru, sehingga referensi ke data plan harus diperbarui agar menyesuaikan dengan daftar plan yang baru.
+
 
 
 
