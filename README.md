@@ -228,6 +228,12 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 * Tambah parameter
 ![Langkah ke 8](image/Screenshot%202025-11-03%20231428.png)
 
+### Langkah 9: Buat screen baru
+* buat file baru dan isi dengan kode
+![Langkah ke 9](image/Screenshot%202025-11-03%20232239.png)
+
+
+
 
 
 
