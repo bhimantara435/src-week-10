@@ -155,7 +155,35 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
  ### Hasil :
    ![Hasil](image/Gambar%20WhatsApp%202025-11-03%20pukul%2021.47.40_e14ee255.jpg)
 
+   Setelah langkah 9 selesai, aplikasi kini menampilkan daftar tugas dari objek Plan dalam bentuk ListView dengan setiap item berisi Checkbox dan TextFormField untuk menandai serta mengedit tugas. Pengguna dapat menambah tugas baru lewat tombol FloatingActionButton (+), dan perubahan akan langsung terlihat tanpa setState(). Di bagian bawah layar, teks progres seperti “1 out of 3 tasks” otomatis memperbarui sesuai jumlah tugas yang selesai. Semua pembaruan terjadi secara reaktif berkat PlanProvider dan ValueListenableBuilder yang memastikan tampilan selalu sinkron dengan data.
 
+
+### Praktikum 2: Mengelola Data Layer dengan InheritedWidget dan InheritedNotifier
+
+## 1. Penjelasan InheritedWidget pada Langkah 1
+
+Pada langkah pertama, kita membuat sebuah kelas bernama `PlanProvider` yang menurunkan `InheritedNotifier<ValueNotifier<Plan>>`.  
+Secara sederhana, `InheritedWidget` adalah widget bawaan Flutter yang digunakan untuk **mendistribusikan data ke seluruh bagian aplikasi** tanpa perlu mengirim data secara manual melalui konstruktor widget.
+
+Namun dalam praktikum ini, kita tidak langsung menggunakan `InheritedWidget`, melainkan **`InheritedNotifier`**.  
+Alasannya, `InheritedNotifier` merupakan versi yang lebih canggih karena dapat **mendengarkan perubahan data secara otomatis**. Saat data diubah melalui `ValueNotifier`, seluruh widget yang bergantung pada data tersebut akan **langsung diperbarui** tanpa perlu memanggil `setState()` secara manual.
+
+Dengan kata lain, `InheritedNotifier` membuat proses sinkronisasi antara data dan tampilan menjadi otomatis dan efisien.
+Inilah alasan utama mengapa kita menggunakan `InheritedNotifier` di langkah ini — agar pengelolaan state lebih rapi, efisien, dan terpusat.
+
+---
+
+## 2. Penjelasan Method pada Langkah 3
+
+Pada langkah ketiga, kita menambahkan dua buah method ke dalam model `Plan`, yaitu:
+
+```dart
+int get completedCount => tasks
+    .where((task) => task.complete)
+    .length;
+
+String get completenessMessage =>
+    '$completedCount out of ${tasks.length} tasks';
 
 
 
