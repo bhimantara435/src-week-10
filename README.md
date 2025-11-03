@@ -130,3 +130,7 @@ Method initState() pada langkah 11 digunakan untuk menginisialisasi ScrollContro
 ### Langkah 4: Pindah ke PlanScreen
 * hapus code
   ![Langkah ke 4](image/Screenshot%202025-11-03%20205825.png)
+
+### Langkah 5: Edit method _buildAddTaskButton
+* Edit method dalam file plan_screen
+  ![Langkah ke 5](image/Screenshot%202025-11-03%20210250.png)
