@@ -236,7 +236,9 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 * Tambahkan Parameter
 ![Langkah ke 10](image/Screenshot%202025-11-03%20232440.png)
 
-
+### Langkah 11: Pindah ke method build
+* Tambahkan Parameter
+![Langkah ke 11](image/Screenshot%202025-11-03%20232758.png)
 
 
 
