@@ -221,8 +221,12 @@ Langkah 3–4 menyebabkan error karena sebelumnya PlanProvider hanya menyimpan s
 
 ### Langkah 7: Widget build
 * Tambah parameter
-![Langkah ke 6](image/Screenshot%202025-11-03%20231030.png)
+![Langkah ke 7](image/Screenshot%202025-11-03%20231030.png)
 
+
+### Langkah 8: Edit _buildTaskTile
+* Tambah parameter
+![Langkah ke 8](image/Screenshot%202025-11-03%20231428.png)
 
 
 
